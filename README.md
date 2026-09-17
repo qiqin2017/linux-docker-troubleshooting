@@ -1,8 +1,10 @@
 # Linux & Docker Troubleshooting Toolkit
 
-A small collection of shell scripts for diagnosing common Linux and Docker server problems.
+A small collection of practical shell scripts for diagnosing common Linux and Docker server problems.
 
-The toolkit provides simple read-only checks for Docker, disk usage, and TCP ports.
+This project provides simple, read-only diagnostic tools that help identify common issues with Docker, disk usage, ports, and Linux server environments.
+
+The goal is to make basic server troubleshooting easier for developers, website owners, and Linux beginners.
 
 ## Features
 
@@ -14,39 +16,72 @@ The toolkit provides simple read-only checks for Docker, disk usage, and TCP por
 * Check large directories under `/var`
 * Check whether a TCP port is in use
 * Check Docker container port mappings
+* Simple command-line interface
+* Read-only diagnostics
 * No automatic destructive cleanup
-* No configuration changes by default
+* No automatic system configuration changes
+
+## Project Structure
+
+```text
+linux-docker-troubleshooting-toolkit/
+├── README.md
+├── LICENSE
+├── scripts/
+│   ├── docker-check.sh
+│   ├── disk-check.sh
+│   └── port-check.sh
+└── examples/
+    └── .gitkeep
+```
 
 ## Requirements
+
+The scripts are designed for common Linux environments.
+
+Recommended environment:
 
 * Linux
 * Bash
 * Docker for Docker-related checks
-* `ss` or `netstat` for port checks
+* `systemctl` where available
+* `ss` or `netstat` for port inspection
 
-Some commands may require `sudo` to display complete information.
+Some commands may require `sudo` to display complete system information.
 
 ## Installation
 
-Clone this repository:
+Clone the repository:
 
+```bash
 git clone https://github.com/qiqin2017/linux-docker-troubleshooting-toolkit.git
+```
 
 Enter the project directory:
 
+```bash
 cd linux-docker-troubleshooting-toolkit
+```
 
 Make the scripts executable:
 
+```bash
 chmod +x scripts/*.sh
+```
 
-## 1. Docker Environment Check
+You can then run the scripts directly.
 
-Use this script when Docker commands are failing or you want to inspect the Docker environment.
+---
+
+# 1. Docker Environment Check
+
+Use this script when Docker commands are failing or you want to quickly inspect the Docker environment.
 
 Run:
 
+```bash
 ./scripts/docker-check.sh
+```
 
 The script checks:
 
@@ -63,7 +98,9 @@ The script checks:
 
 If you see:
 
+```text
 permission denied while trying to connect to the Docker daemon socket
+```
 
 the script can help you inspect:
 
@@ -74,15 +111,19 @@ the script can help you inspect:
 
 The script does not automatically change permissions.
 
-## 2. Linux Disk Check
+---
+
+# 2. Linux Disk Check
 
 Use this script when a server is running out of storage or Docker applications unexpectedly stop working.
 
 Run:
 
+```bash
 ./scripts/disk-check.sh
+```
 
-It checks:
+The script checks:
 
 * Filesystem usage
 * Inode usage
@@ -106,21 +147,31 @@ This is intentional.
 
 Always review disk usage before performing cleanup operations.
 
-## 3. Linux Port Check
+---
+
+# 3. Linux Port Check
 
 Use this script when an application cannot start because a port may already be occupied.
 
 Run:
 
+```bash
 ./scripts/port-check.sh 3000
+```
 
 Other examples:
 
+```bash
 ./scripts/port-check.sh 80
+```
 
+```bash
 ./scripts/port-check.sh 443
+```
 
+```bash
 ./scripts/port-check.sh 8080
+```
 
 The script checks:
 
@@ -130,37 +181,61 @@ The script checks:
 
 This can be useful when an application reports:
 
+```text
 Address already in use
+```
 
 or:
 
+```text
 EADDRINUSE
+```
 
-## Recommended Troubleshooting Workflow
+---
+
+# Recommended Troubleshooting Workflow
 
 When a Docker application is not working, a simple first-pass workflow is:
 
+```text
 1. Check Docker
+       |
+       v
 2. Check containers
+       |
+       v
 3. Check disk space
+       |
+       v
 4. Check the required port
+       |
+       v
 5. Inspect application logs
+```
 
 For example:
 
+```bash
 ./scripts/docker-check.sh
+```
 
 Then:
 
+```bash
 ./scripts/disk-check.sh
+```
 
 Then:
 
+```bash
 ./scripts/port-check.sh 3000
+```
 
 Replace `3000` with the port used by your application.
 
-## Safety
+---
+
+# Safety
 
 These scripts are primarily diagnostic.
 
@@ -176,9 +251,41 @@ They do not intentionally:
 * Change file permissions
 * Modify system configuration
 
-Always review commands before running them on production systems.
+Always review commands before using them on production systems.
 
-## Contributing
+---
+
+# Related Linux, Docker and Server Resources
+
+This toolkit is part of a broader collection of practical technical resources covering Linux servers, Docker, AI tools, and developer workflows.
+
+### Server & Docker Guides
+
+[Press.Yueke.Cloud](https://press.yueke.cloud/)
+
+Practical Linux server, Docker, deployment, and server troubleshooting guides.
+
+### AI Tools & Troubleshooting
+
+[AI.Yueke.Cloud](https://ai.yueke.cloud/)
+
+AI tools, AI software guides, troubleshooting, and practical AI workflows.
+
+### Side Hustle & Developer Guides
+
+[Work.Yueke.Cloud](https://work.yueke.cloud/)
+
+Practical side-hustle tutorials, developer resources, and online project ideas.
+
+### International How-To Resources
+
+[EasyHowly](https://easyhowly.com/)
+
+English-language how-to guides covering technology, software, Linux, Docker, and practical online tools.
+
+---
+
+# Contributing
 
 Issues and pull requests are welcome.
 
@@ -193,8 +300,11 @@ Possible future additions include:
 * CPU load checks
 * Docker Compose diagnostics
 * Basic web service health checks
+* Web server health checks
 
-## Disclaimer
+---
+
+# Disclaimer
 
 This project is provided for troubleshooting and educational purposes.
 
@@ -202,6 +312,10 @@ System administration commands can behave differently across Linux distributions
 
 Always review diagnostic output and understand commands before using them on production systems.
 
-## License
+The authors are not responsible for damage caused by improper use of system administration commands.
+
+---
+
+# License
 
 MIT License.
