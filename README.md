@@ -30,7 +30,7 @@ Some commands may require `sudo` to display complete information.
 
 Clone this repository:
 
-git clone https://github.com/YOUR-USERNAME/linux-docker-troubleshooting-toolkit.git
+git clone https://github.com/qiqin2017/linux-docker-troubleshooting-toolkit.git
 
 Enter the project directory:
 
